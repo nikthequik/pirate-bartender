@@ -24,58 +24,107 @@ $(function() {
 
 	function Bartender() {};
 	Bartender.prototype.questions = [];
-	Bartender.prototype.createDrink = function(userPref){
-		var newdrink = new Drink();
-		if (userPref.strong === true) {
+	Bartender.prototype.random5 = function() {
+		var index = Math.floor(Math.random() * 5);
+		return index;
+	}
+	Bartender.prototype.random3 = function() {
+		var index = Math.floor(Math.random() * 3);
+		return index;
+	}
+	Bartender.prototype.createDrink = function(userPref, pantry){
+		$("#dialogue").html("<p class='question'>Coming right up, matey!</p>");
+		var index = this.random3();
+		setTimeout(function(){
+			var newDrink = new Drink();
+			if (userPref.strong === true) {
+				newDrink.strong = pantry.strong[index].iName;
+			}
+			else {
+				newDrink.strong = "nothing strong";
+			}
+			if (userPref.salty === true) {
+				newDrink.salty = pantry.salty[index].iName;
+			}
+			else {
+				newDrink.salty = "nothing salty";
+			}
+			if (userPref.bitter === true) {
+				newDrink.bitter = pantry.bitter[index].iName;
+			}
+			else {
+				newDrink.bitter = "nothing bitter";
+			}
+			if (userPref.sweet === true) {
+				newDrink.sweet = pantry.sweet[index].iName;
+			}
+			else {
+				newDrink.sweet = "nothing sweet";
+			}
+			if (userPref.fruity === true) {
+				newDrink.fruity = pantry.fruity[index].iName;
+			}
+			else {
+				newDrink.fruity = "nothing fruity";
+			}
+			$("#dialogue").html("<p class='question'>Your drink is ready, matey!  It's got " + newDrink.strong + ", " + newDrink.salty + ", " + newDrink.bitter + ", " + newDrink.sweet + ", and " + newDrink.fruity + "! Enjoy!</p>");
+	    }, 1000);
 
-		}
-		if (userPref.salty === true) {
-			
-		}
-		if (userPref.bitter === true) {
-			
-		}
-		if (userPref.sweet === true) {
-			
-		}
-		if (userPref.fruity === true) {
-			
-		}
+	
 	};
 	Bartender.prototype.askQuestion = function() {
-		var index = Math.floor(Math.random() * 5);
-		console.log(index);
-		var newQuestion = this.questions[index].lead + this.questions[qCount].subject + "?";
-		$("#dialogue").html("<p class='question'>" + newQuestion + "</p><button id='yes' class='input'>Yes</button><button id='no' class='input'>No</button>");
-		qCount ++;
+		if (qCount < 5) {
+			var bartender = this;
+			var index = this.random5();
+			var subject = this.questions[qCount].subject;
+			console.log(subject);
+			console.log(index);
+			var newQuestion = this.questions[index].lead + subject + "?";
+			$("#dialogue").html("<p class='question'>" + newQuestion + "</p><button id='yes' class='input'>Yes</button><button id='no' class='input'>No</button>");
+			$("#yes").click(function(){
+				preference[subject] = true;
+				console.log(subject);
+				console.log(preference);
+				qCount ++;
+				bartender.askQuestion();
+			});
+			$("#no").click(function(){
+				qCount ++;
+				bartender.askQuestion();
+			});
+			
+		}
+		else {
+			this.createDrink(preference, cupboard);
+		}
 	};
 
 	//Create cupboard and its ingredients
 	var cupboard = new Pantry();
 
-	var whiskey = new Ingredient("Whiskey", "strong");
-	var rum = new Ingredient("Rum", "strong");
-	var vodka = new Ingredient("Vodka", "strong");
+	var whiskey = new Ingredient("whiskey", "strong");
+	var rum = new Ingredient("rum", "strong");
+	var vodka = new Ingredient("vodka", "strong");
 	cupboard.strong.push(whiskey, rum, vodka);
 
-	var bacon = new Ingredient("Bacon crumbles", "salty");
-	var seaSalt = new Ingredient("Sea Salt", "salty");
-	var olive = new Ingredient("Cocktail Olives", "salty");
+	var bacon = new Ingredient("bacon crumbles", "salty");
+	var seaSalt = new Ingredient("sea salt", "salty");
+	var olive = new Ingredient("some cocktail olives", "salty");
 	cupboard.salty.push(bacon, seaSalt, olive);
 
-	var lemon = new Ingredient("Twist of Lemon", "bitter");
-	var lime = new Ingredient("Squeeze of Lime", "bitter");
-	var tonic = new Ingredient("Splash of Tonic", "bitter");
+	var lemon = new Ingredient("a twist of lemon", "bitter");
+	var lime = new Ingredient("a squeeze of lime", "bitter");
+	var tonic = new Ingredient("a splash of tonic", "bitter");
 	cupboard.bitter.push(lemon, lime, tonic);
 
-	var sugar = new Ingredient("Sugar Cube", "sweet");
-	var cola = new Ingredient("Splash of Cola", "sweet");
-	var honey = new Ingredient("Drop of Honey", "sweet");
+	var sugar = new Ingredient("a cube of sugar", "sweet");
+	var cola = new Ingredient("a splash of cola", "sweet");
+	var honey = new Ingredient("a drop of honey", "sweet");
 	cupboard.sweet.push(sugar, cola, honey);
 
-	var apple = new Ingredient("Splash of Apple Juice", "fruity");
-	var orange = new Ingredient("Splash of Orange Juice", "fruity");
-	var cherry = new Ingredient("Cherry on Top", "fruity");
+	var apple = new Ingredient("a splash of apple juice", "fruity");
+	var orange = new Ingredient("a splash of orange juice", "fruity");
+	var cherry = new Ingredient("a cherry on top", "fruity");
 	cupboard.fruity.push(apple, orange, cherry);
 
 
@@ -89,11 +138,11 @@ $(function() {
 	moe.questions.push(strongQ, saltyQ, bitterQ, sweetQ, fruityQ);
 
 	var preference = {
-		strong: "",
-		salty: "",
-		bitter: "",
-		sweet: "",
-		fruity: ""
+		strong: false,
+		salty: false,
+		bitter: false,
+		sweet: false,
+		fruity: false
 	};
 	
 	moe.askQuestion();
