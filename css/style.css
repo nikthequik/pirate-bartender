@@ -12,14 +12,14 @@ body {
 
 #dialogue {
 	background-color: white;
-	height: 6em;
-	width: 15em;
+	height: 6.6em;
+	width: 15.5em;
 	position: absolute;
-	top: 26em;
+	top: 23.8em;
 	border: 3px solid black;
 	border-radius: 1em;
-	left: 13em;
-	padding: .5em; 
+	left: 11.3em;
+	padding: .5em;
 }
 
 #bar {
@@ -42,6 +42,7 @@ body {
 
 .question {
 	font-family: Georgia, serif, sans-serif;
+	font-size: 1.1em;
 }
 
 .input {

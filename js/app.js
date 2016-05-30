@@ -40,7 +40,8 @@ $(function() {
 		}
 	};
 	Bartender.prototype.askQuestion = function() {
-		var index = Math.floor((Math.random() * 5) + 1);
+		var index = Math.floor(Math.random() * 5);
+		console.log(index);
 		var newQuestion = this.questions[index].lead + this.questions[qCount].subject + "?";
 		$("#dialogue").html("<p class='question'>" + newQuestion + "</p><button class='input'>Yes</button><button class='input'>No</button>");
 		qCount ++;
