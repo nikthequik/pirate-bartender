@@ -43,17 +43,17 @@ $(function() {
 		var index = Math.floor(Math.random() * 5);
 		console.log(index);
 		var newQuestion = this.questions[index].lead + this.questions[qCount].subject + "?";
-		$("#dialogue").html("<p class='question'>" + newQuestion + "</p><button class='input'>Yes</button><button class='input'>No</button>");
+		$("#dialogue").html("<p class='question'>" + newQuestion + "</p><button id='yes' class='input'>Yes</button><button id='no' class='input'>No</button>");
 		qCount ++;
 	};
 
 	var moe = new Bartender();
 
-	var strongQ = new Question("Do you like it when your drinks are ", "strong");
-	var saltyQ = new Question("Are you a fan of a drink that can be described as ", "salty");
-	var bitterQ = new Question("Are you in the mood for something ", "bitter");
-	var sweetQ = new Question("Would you like me to make your drink ", "sweet");
-	var fruityQ = new Question("Would it be alright if you could describe your drink as ", "fruity");
+	var strongQ = new Question("Do ye like it when yer drinks are ", "strong");
+	var saltyQ = new Question("Are ye a fan o' drinks that can be described as ", "salty");
+	var bitterQ = new Question("Are ye in the mood for somethin' ", "bitter");
+	var sweetQ = new Question("Would ye like I to make yer drink ", "sweet");
+	var fruityQ = new Question("Would it be alright if ye could describe yer sauce as ", "fruity");
 
 	moe.questions.push(strongQ, saltyQ, bitterQ, sweetQ, fruityQ);
 
