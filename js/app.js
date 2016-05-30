@@ -1,6 +1,14 @@
 $(function() {
 	
 	var qCount = 0;
+	function random5() {
+		var index = Math.floor(Math.random() * 5);
+		return index;
+	}
+	function random3() {
+		var index = Math.floor(Math.random() * 3);
+		return index;
+	}
 
 	function Question(lead, subject) {
 		this.lead = lead;
@@ -24,45 +32,36 @@ $(function() {
 
 	function Bartender() {};
 	Bartender.prototype.questions = [];
-	Bartender.prototype.random5 = function() {
-		var index = Math.floor(Math.random() * 5);
-		return index;
-	}
-	Bartender.prototype.random3 = function() {
-		var index = Math.floor(Math.random() * 3);
-		return index;
-	}
 	Bartender.prototype.createDrink = function(userPref, pantry){
 		$("#dialogue").html("<p class='question'>Coming right up, matey!</p>");
-		var index = this.random3();
 		setTimeout(function(){
 			var newDrink = new Drink();
 			if (userPref.strong === true) {
-				newDrink.strong = pantry.strong[index].iName;
+				newDrink.strong = pantry.strong[random3()].iName;
 			}
 			else {
 				newDrink.strong = "nothing strong";
 			}
 			if (userPref.salty === true) {
-				newDrink.salty = pantry.salty[index].iName;
+				newDrink.salty = pantry.salty[random3()].iName;
 			}
 			else {
 				newDrink.salty = "nothing salty";
 			}
 			if (userPref.bitter === true) {
-				newDrink.bitter = pantry.bitter[index].iName;
+				newDrink.bitter = pantry.bitter[random3()].iName;
 			}
 			else {
 				newDrink.bitter = "nothing bitter";
 			}
 			if (userPref.sweet === true) {
-				newDrink.sweet = pantry.sweet[index].iName;
+				newDrink.sweet = pantry.sweet[random3()].iName;
 			}
 			else {
 				newDrink.sweet = "nothing sweet";
 			}
 			if (userPref.fruity === true) {
-				newDrink.fruity = pantry.fruity[index].iName;
+				newDrink.fruity = pantry.fruity[random3()].iName;
 			}
 			else {
 				newDrink.fruity = "nothing fruity";
@@ -75,7 +74,7 @@ $(function() {
 	Bartender.prototype.askQuestion = function() {
 		if (qCount < 5) {
 			var bartender = this;
-			var index = this.random5();
+			var index = random5();
 			var subject = this.questions[qCount].subject;
 			console.log(subject);
 			console.log(index);
