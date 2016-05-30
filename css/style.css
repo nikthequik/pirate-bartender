@@ -10,11 +10,16 @@ body {
 	background-image: url(../img/wood.jpg);
 }
 
-#banner {
-	background-color: olive;
-	text-align: center;
-	padding: 0.1em;
-	border-radius: 0px 0px 15px 15px;
+#dialogue {
+	background-color: white;
+	height: 6em;
+	width: 15em;
+	position: absolute;
+	top: 26em;
+	border: 3px solid black;
+	border-radius: 1em;
+	left: 13em;
+	padding: .5em; 
 }
 
 #bar {
@@ -24,11 +29,21 @@ body {
 	background-position: center;
 	margin: 0 auto;
 	background-repeat: no-repeat;
+	position: relative;
 }
 
 #pirate {
-	width: 19.2em;
+	width: 19.4em;
+	position: absolute;
 	transform: rotate(3deg);
 	margin-top: 20.5em;
 	margin-left: 28.7em;
+}
+
+.question {
+	font-family: Georgia, serif, sans-serif;
+}
+
+.input {
+	margin-left: 4em;
 }
