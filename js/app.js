@@ -66,7 +66,7 @@ $(function() {
 			else {
 				newDrink.fruity = "nothing fruity";
 			}
-			$("#dialogue").html("<p class='question'>Your drink is ready, matey!  It's got " + newDrink.strong + ", " + newDrink.salty + ", " + newDrink.bitter + ", " + newDrink.sweet + ", and " + newDrink.fruity + "! Enjoy!</p>");
+			$("#dialogue").html("<p class='question'>Your drink is ready, matey!  It's got " + newDrink.strong + ", " + newDrink.salty + ", " + newDrink.bitter + ", " + newDrink.sweet + ", and " + newDrink.fruity + "! <span class='goodbye'>Enjoy Matey!</span></p>");
 	    }, 1000);
 
 	

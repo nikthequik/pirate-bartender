@@ -12,19 +12,20 @@ body {
 
 #dialogue {
 	background-color: white;
-	height: 7.6em;
+	height: 6.6em;
 	width: 15.5em;
 	position: absolute;
-	top: 23.8em;
+	top: 12.8em;
 	border: 3px solid black;
 	border-radius: 1em;
-	left: 11.3em;
-	padding: .5em;
+	left: 4em;
+	padding: 0.7em;
 }
 
 #bar {
 	height: 748px;
-	background-image: url(../img/bar.jpg);
+	width: 70em;
+	background-image: url(../img/pirate-bar.jpg);
 	background-size: contain;
 	background-position: center;
 	margin: 0 auto;
@@ -47,6 +48,11 @@ body {
 }
 
 .input {
-	margin-left: 4em;
+	margin-left: 2.7em;
 	margin-top: .5em;
+	font-size: 1.2em;
+}
+
+.goodbye {
+	font-size: 1.5em;
 }
