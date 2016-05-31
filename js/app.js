@@ -66,8 +66,13 @@ $(function() {
 			else {
 				newDrink.fruity = "nothing fruity";
 			}
-			$("#dialogue").html("<p class='question'>Your drink is ready, matey!  It's got " + newDrink.strong + ", " + newDrink.salty + ", " + newDrink.bitter + ", " + newDrink.sweet + ", and " + newDrink.fruity + "! <span class='goodbye'>Enjoy Matey!</span></p>");
-	    }, 1000);
+			$("#dialogue").html("<p class='question'>Your drink is ready, matey!  It's got " + newDrink.strong + ", " + newDrink.salty + ", " + newDrink.bitter + ", " + newDrink.sweet + ", and " + newDrink.fruity + "! <br><span class='goodbye'>Enjoy Matey!</span></p>");
+			setTimeout(function(){
+				$('#replay').fadeIn(500);
+			}, 500);
+	    	}, 1000);
+			
+
 
 	
 	};

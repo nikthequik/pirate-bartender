@@ -12,7 +12,6 @@ body {
 
 #dialogue {
 	background-color: white;
-	height: 6.6em;
 	width: 15.5em;
 	position: absolute;
 	top: 12.8em;
@@ -20,6 +19,19 @@ body {
 	border-radius: 1em;
 	left: 4em;
 	padding: 0.7em;
+}
+
+#replay {
+	background-color: white;
+	width: 15.5em;
+	position: absolute;
+	top: 26.8em;
+	left: 46em;
+	border: 3px solid black;
+	border-radius: 1em;
+	text-align: center;
+	padding: 0.7em;
+	display: none;
 }
 
 #bar {
@@ -51,6 +63,12 @@ body {
 	margin-left: 2.7em;
 	margin-top: .5em;
 	font-size: 1.2em;
+	font-weight: 700;
+}
+
+#reset {
+	font-size: 1.2em;
+	font-weight: 700;
 }
 
 .goodbye {
