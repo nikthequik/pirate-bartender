@@ -33,6 +33,7 @@ $(function() {
 	function Bartender() {};
 	Bartender.prototype.questions = [];
 	Bartender.prototype.createDrink = function(userPref, pantry){
+		var bartender = this;
 		$("#dialogue").html("<p class='question'>Coming right up, matey!</p>");
 		setTimeout(function(){
 			var newDrink = new Drink();
@@ -69,6 +70,11 @@ $(function() {
 			$("#dialogue").html("<p class='question'>Your drink is ready, matey!  It's got " + newDrink.strong + ", " + newDrink.salty + ", " + newDrink.bitter + ", " + newDrink.sweet + ", and " + newDrink.fruity + "! <br><span class='goodbye'>Enjoy Matey!</span></p>");
 			setTimeout(function(){
 				$('#replay').fadeIn(500);
+				$('#reset').click(function(){
+					qCount = 0;
+					$('#replay').fadeOut(500);
+					bartender.askQuestion();
+				});
 			}, 500);
 	    	}, 1000);
 			
