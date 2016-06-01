@@ -1,32 +1,32 @@
 $(function() {
-	
 	var qCount = 0;
 	function random5() {
 		var index = Math.floor(Math.random() * 5);
 		return index;
-	}
+	};
 	function random3() {
 		var index = Math.floor(Math.random() * 3);
 		return index;
-	}
+	};
 
 	function Question(lead, subject) {
 		this.lead = lead;
 		this.subject = subject;
 	};
 
-	function Ingredient(iName, flavor) {
+	function Ingredient(iName, description, preference) {
 		this.iName = iName;
-		this.flavor = flavor;
+		this.description = description;
+		this.preference = preference;
 	};
 
-	function Pantry() {};
-	Pantry.prototype.strong = [];
-	Pantry.prototype.salty = [];
-	Pantry.prototype.bitter = [];
-	Pantry.prototype.sweet = [];
-	Pantry.prototype.fruity = [];
-
+	function Pantry() {
+		this.strong = [];
+		this.salty = [];
+		this.bitter = [];
+		this.sweet = [];
+		this.fruity = [];
+	};
 
 	function Drink() {};
 
@@ -37,32 +37,32 @@ $(function() {
 		$("#dialogue").html("<p class='question'>Coming right up, matey!</p>");
 		setTimeout(function(){
 			var newDrink = new Drink();
-			if (userPref.strong === true) {
-				newDrink.strong = pantry.strong[random3()].iName;
+			if (userPref.strong) {
+				newDrink.strong = pantry.strong[random3()].description;
 			}
 			else {
 				newDrink.strong = "nothing strong";
 			}
-			if (userPref.salty === true) {
-				newDrink.salty = pantry.salty[random3()].iName;
+			if (userPref.salty) {
+				newDrink.salty = pantry.salty[random3()].description;
 			}
 			else {
 				newDrink.salty = "nothing salty";
 			}
-			if (userPref.bitter === true) {
-				newDrink.bitter = pantry.bitter[random3()].iName;
+			if (userPref.bitter) {
+				newDrink.bitter = pantry.bitter[random3()].description;
 			}
 			else {
 				newDrink.bitter = "nothing bitter";
 			}
-			if (userPref.sweet === true) {
-				newDrink.sweet = pantry.sweet[random3()].iName;
+			if (userPref.sweet) {
+				newDrink.sweet = pantry.sweet[random3()].description;
 			}
 			else {
 				newDrink.sweet = "nothing sweet";
 			}
-			if (userPref.fruity === true) {
-				newDrink.fruity = pantry.fruity[random3()].iName;
+			if (userPref.fruity) {
+				newDrink.fruity = pantry.fruity[random3()].description;
 			}
 			else {
 				newDrink.fruity = "nothing fruity";
@@ -76,25 +76,17 @@ $(function() {
 					bartender.askQuestion();
 				});
 			}, 500);
-	    	}, 1000);
-			
-
-
-	
+	    }, 1000);
 	};
 	Bartender.prototype.askQuestion = function() {
 		if (qCount < 5) {
 			var bartender = this;
 			var index = random5();
-			var subject = this.questions[qCount].subject;
-			console.log(subject);
-			console.log(index);
-			var newQuestion = this.questions[index].lead + subject + "?";
+			var subject = mockData.questions[qCount].subject;
+			var newQuestion = mockData.questions[index].lead + subject + "?";
 			$("#dialogue").html("<p class='question'>" + newQuestion + "</p><button id='yes' class='input'>Yes</button><button id='no' class='input'>No</button>");
 			$("#yes").click(function(){
 				preference[subject] = true;
-				console.log(subject);
-				console.log(preference);
 				qCount ++;
 				bartender.askQuestion();
 			});
@@ -109,43 +101,15 @@ $(function() {
 		}
 	};
 
-	//Create cupboard and its ingredients
+
+	//Create cupboard
 	var cupboard = new Pantry();
 
-	var whiskey = new Ingredient("whiskey", "strong");
-	var rum = new Ingredient("rum", "strong");
-	var vodka = new Ingredient("vodka", "strong");
-	cupboard.strong.push(whiskey, rum, vodka);
-
-	var bacon = new Ingredient("bacon crumbles", "salty");
-	var seaSalt = new Ingredient("sea salt", "salty");
-	var olive = new Ingredient("some cocktail olives", "salty");
-	cupboard.salty.push(bacon, seaSalt, olive);
-
-	var lemon = new Ingredient("a twist of lemon", "bitter");
-	var lime = new Ingredient("a squeeze of lime", "bitter");
-	var tonic = new Ingredient("a splash of tonic", "bitter");
-	cupboard.bitter.push(lemon, lime, tonic);
-
-	var sugar = new Ingredient("a cube of sugar", "sweet");
-	var cola = new Ingredient("a splash of cola", "sweet");
-	var honey = new Ingredient("a drop of honey", "sweet");
-	cupboard.sweet.push(sugar, cola, honey);
-
-	var apple = new Ingredient("a splash of apple juice", "fruity");
-	var orange = new Ingredient("a splash of orange juice", "fruity");
-	var cherry = new Ingredient("a cherry on top", "fruity");
-	cupboard.fruity.push(apple, orange, cherry);
-
-
-	//Create moe and his questions
-	var moe = new Bartender();
-	var strongQ = new Question("Do ye like it when yer drinks are ", "strong");
-	var saltyQ = new Question("Are ye a fan o' drinks that can be described as ", "salty");
-	var bitterQ = new Question("Are ye in the mood for somethin' ", "bitter");
-	var sweetQ = new Question("Would ye like I to make yer drink ", "sweet");
-	var fruityQ = new Question("Would it be alright if ye could describe yer sauce as ", "fruity");
-	moe.questions.push(strongQ, saltyQ, bitterQ, sweetQ, fruityQ);
+	function stock(pantry){
+		$.each(mockData.ingredients, function(index, ingredient) {
+			pantry[ingredient.preference].push(new Ingredient(ingredient.name, ingredient.description, ingredient.preference));
+		});
+	};
 
 	var preference = {
 		strong: false,
@@ -154,7 +118,8 @@ $(function() {
 		sweet: false,
 		fruity: false
 	};
-	
+	var moe = new Bartender();
+	stock(cupboard);
 	moe.askQuestion();
 
 });
